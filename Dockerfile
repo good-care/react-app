@@ -9,6 +9,9 @@ CMD "mkdir src"
 COPY ./src ./src
 CMD "mkdir public"
 COPY ./public ./public
+COPY babel.config.json .
+COPY webpack.config.js .
+
 RUN npm run build
 # copying the result to the Nginx server
 FROM nginx:stable-alpine as nginx
