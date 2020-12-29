@@ -11,8 +11,9 @@ CMD "mkdir public"
 COPY ./public ./public
 COPY babel.config.json .
 COPY webpack.config.js .
-
+COPY .env .
 RUN npm run build
+
 # copying the result to the Nginx server
 FROM nginx:stable-alpine as nginx
 COPY nginx/default.conf /etc/nginx/conf.d

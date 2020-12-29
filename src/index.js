@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Home} from "./components/home/Home";
-
+import {HomePage} from "./components/homepage/HomePage";
 // import reportWebVitals from './reportWebVitals';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <HomePage />
   </React.StrictMode>,
   document.getElementById('root')
 );
