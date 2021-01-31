@@ -1,0 +1,21 @@
+.currentPage {
+  background: lightskyblue;
+  border: 2px solid gold;
+}
+
+.otherPage {
+  border: none;
+  background: white;
+}
+
+.selector-button {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
+  width: 50px;
+  height: 30px;
+  outline: none;
+}

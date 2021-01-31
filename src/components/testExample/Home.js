@@ -2,10 +2,6 @@ import * as React from "react";
 import "./Home.scss";
 
 export class Home extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (<Hello name="Andrey" />);
     }

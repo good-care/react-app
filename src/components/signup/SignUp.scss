@@ -1,0 +1,50 @@
+.signUp-link {
+  text-decoration: underline;
+  color: cornflowerblue;
+  text-decoration-color: cornflowerblue;
+}
+
+.signUp-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.signUp-button {
+  background-color: #4CAF50; /* Green */
+  border-style: solid;
+  color: white;
+  padding: 5px 8px;
+  margin: 5px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.signUp-button:focus {
+  outline: none;
+  box-shadow: 0 0 2px #0066ff;
+}
+
+.signUp-input {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  border-radius: 8px;
+  border-style: solid;
+  padding: 10px;
+}
+.signUp-input:focus{
+  outline: none;
+  box-shadow: 0 0 2px #0066ff;
+}
+
+.signUp-label {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: auto;
+}

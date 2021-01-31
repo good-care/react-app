@@ -1,21 +1,22 @@
 import * as React from "react";
 
 export class RequestService extends React.Component {
-    constructor(props) {
-        super(props);
-        this.requestSettings = {
+
+    getRequestSettings(body, token = ''){
+        return {
             method: 'POST',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization': token
             },
-            body: JSON.stringify({example: 'data'})
+            body: JSON.stringify(body)
         }
     }
 
-    async sendPostRequest(requestBody) {
+    async sendPostRequest(requestAddress, requestBody = {}, token = '') {
         return await fetch(
-            'http://' + this.getHost() + ':' + this.getPort() + '/' + requestBody,
-            this.requestSettings)
+            'http://' + this.getHost() + ':' + this.getPort() + '/' + requestAddress,
+            this.getRequestSettings(requestBody, token))
             .then((response) => {
                 if (response.ok)
                     return response.json()
@@ -40,3 +41,6 @@ export class RequestService extends React.Component {
         return process.env.PHP_API_PORT
     }
 }
+
+//Singleton
+export const requestService = new RequestService();
