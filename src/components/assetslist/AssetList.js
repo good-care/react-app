@@ -64,7 +64,7 @@ export class AssetList extends React.Component {
 
         if (data === undefined) {
             return <>
-                <span> Not ready yet! </span>
+                <span> Connect to {process.env.PHP_API_HOST}:{process.env.PHP_API_PORT}! </span>
             </>
         } else {
             const listItems = data.map((asset) =>
