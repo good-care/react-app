@@ -5,8 +5,8 @@ import {requestService} from "./RequestService";
 export class AssetService extends React.Component {
 
     constructor() {
-        super();
-        this.requestService = requestService;
+        super()
+        this.requestService = requestService
     }
 
     async getAssetsByType(type, from = 0, size = 100) {
@@ -36,6 +36,11 @@ export class AssetService extends React.Component {
             'api/quotations/' + id + '?from=' + from + '&size=' + size)
     }
 
+    async getAssetInfo(id) {
+        return await this.requestService.sendPostRequest(
+            'api/assetInfo/' + id)
+    }
+
     getType(type) {
         switch (type) {
             case 0:
@@ -45,12 +50,36 @@ export class AssetService extends React.Component {
             case 2:
                 return 'bond'
             default:
-                return 'unknown'
+                return ''
         }
     }
 
-    async assetSelect(id){
-        return await this.getQuotations(id)
+    getCurrency(currency){
+        switch (currency) {
+            case 0:
+                return 'RUB'
+            case 1:
+                return 'USD'
+            case 2:
+                return 'EUR'
+            default:
+                return ''
+        }
+    }
+
+    addToPortfolio(asset, token){
+
+        //     if (token && token !== "")
+        //         requestService.sendPostRequest('api/userdata', null, token)
+        //             .then(r => {
+        //                 if (r.code === 1) {
+        //                     this.setUserData(r.data)
+        //                 } else
+        //                     this.setErrorMessage(r.message)
+        //             })
+        //     else
+        //         this.setErrorMessage('Please Login first')
+        // }
     }
 }
 

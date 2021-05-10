@@ -63,7 +63,6 @@ export class Chart extends React.Component {
                 rObj.value = obj.quotation
                 return rObj
             })
-            console.log(listForChart)
         }
 
         return <>

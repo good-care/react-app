@@ -1,17 +1,19 @@
 import * as React from "react";
-import {AssetService} from "../../services/AssetService";
-import "./AssetList.scss"
+import {assertService} from "../../services/AssetService";
+import "./Assets.scss"
 import {PageSelector} from "../pageselector/PageSelector";
 import {Chart} from "../chart/Chart";
+import {AssetInfo} from "../assetinfo/AssetInfo";
+import {Portfolio} from "../portfolio/Portfolio";
 
-export class AssetList extends React.Component {
+export class Assets extends React.Component {
 
-    assetService = new AssetService();
+    //assetService = new AssetService()
 
     constructor(props) {
         super(props)
+        this.assetService = assertService;
         this.changeListPage = this.changeListPage.bind(this)
-        this.stateUpdate = this.stateUpdate.bind(this)
         this.state = {
             assets: {},
             assetsNumber: 20,
@@ -21,16 +23,17 @@ export class AssetList extends React.Component {
                 showPageNumber: 5
             },
             selectId: 0,
+            selectAsset: {}
         }
         this.chart = React.createRef()
     }
 
-    componentDidMount() {
-        this.getAssets(0, this.state.assetsNumber)
+    static defaultProps = {
+        token: {}
     }
 
-    stateUpdate() {
-        this.setState(this.state)
+    componentDidMount() {
+        this.getAssets(0, this.state.assetsNumber)
     }
 
     getAssets(from = 0, size = 20) {
@@ -39,7 +42,7 @@ export class AssetList extends React.Component {
                 value => {
                     this.state.assets = value
                     this.state.pageSelector.pageNumber = Math.ceil(this.state.assets.dataInfo / this.state.assetsNumber)
-                    this.stateUpdate()
+                    this.setState(this.state)
                 }
             )
     }
@@ -48,12 +51,12 @@ export class AssetList extends React.Component {
         const assetsNumber = this.state.assetsNumber
         this.getAssets((currentPage - 1) * assetsNumber, assetsNumber)
         this.state.pageSelector.currentPage = currentPage
-        this.stateUpdate()
+
     }
 
     changeSelectId(id) {
         this.state.selectId = id
-        this.stateUpdate()
+        this.setState(this.state)
     }
 
     render() {
@@ -69,6 +72,7 @@ export class AssetList extends React.Component {
         } else {
             const listItems = data.map((asset) =>
                     <li onClick={() => {
+                        this.state.selectAsset = asset
                         this.changeSelectId(asset.id);
                     }}
                         className={(this.state.selectId === asset.id) ? 'assets-table-select-row' : 'assets-table-row'}
@@ -86,6 +90,8 @@ export class AssetList extends React.Component {
                 )
             ;
             return <>
+                <AssetInfo asset={this.state.selectAsset} token={this.props.token} width={currentWidth}/>
+                <Portfolio token={this.props.token} />
                 <div ref={this.chart} className={'assets-table'}>
                     <div className={'assets-table-title'}>
                         <div className={'assets-table-title-column-security-id'}>SECURITY ID</div>
@@ -102,8 +108,9 @@ export class AssetList extends React.Component {
                 <div>
                     <Chart assetId={this.state.selectId} width={currentWidth}/>
                 </div>
-
             </>
         }
+        return <>
+            </>
     }
 }

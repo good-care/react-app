@@ -28,7 +28,7 @@ export class UserData extends React.Component {
 
     getData() {
         if (this.props.token && this.props.token !== "")
-            requestService.sendPostRequest('api/userdata?userId=5', null, this.props.token)
+            requestService.sendPostRequest('api/userdata', null, this.props.token)
                 .then(r => {
                     if (r.code === 1) {
                         this.setUserData(r.data)

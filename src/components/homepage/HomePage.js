@@ -1,18 +1,19 @@
 import * as React from "react";
 import {Clock} from "../clock/Clock";
-import {AssetList} from "../assetslist/AssetList";
+import {Assets} from "../assets/Assets";
 import {Login} from "../login/Login";
 import {SignUp} from "../signup/SignUp";
 import {requestService} from "../../services/RequestService";
 import {UserData} from "../userdata/UserData";
 import {Cookies} from "react-cookie";
+import {Finder} from "../finder/Finder";
 
 export class HomePage extends React.Component {
 
     constructor(props) {
         super(props)
         this.setToken = this.setToken.bind(this)
-        this.stateUpdate = this.stateUpdate.bind(this)
+        // this.stateUpdate = this.stateUpdate.bind(this)
         this.state = {
             token: '',
             isLogin: false,
@@ -28,10 +29,6 @@ export class HomePage extends React.Component {
 
     componentDidMount() {
         this.getUserData()
-    }
-
-    stateUpdate() {
-        this.setState(this.state)
     }
 
     setToken(token) {
@@ -51,17 +48,18 @@ export class HomePage extends React.Component {
                     } else {
                         this.state.errorMessage = r.message
                     }
-                    this.stateUpdate()
+                    this.setState(this.state)
                 })
         else {
             this.state.isLogin = false
-            this.stateUpdate()
+            this.setState(this.state)
         }
     }
 
     render() {
         return <>
             <div>
+                <p>TEST</p>
                 {this.state.isLogin && <span>Hello, {this.state.userData.username}!</span>}
                 <Login
                     setToken={this.setToken}
@@ -81,8 +79,13 @@ export class HomePage extends React.Component {
             <div>
                 <UserData token={this.state.token}/>
             </div>
+            <div>--------------------------------------------------------------------------------------</div>
             <div>
-                <AssetList/>
+                <Finder/>
+            </div>
+            <div>--------------------------------------------------------------------------------------</div>
+            <div>
+                <Assets token={this.state.token}/>
             </div>
         </>;
 

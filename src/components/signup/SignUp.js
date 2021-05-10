@@ -29,13 +29,11 @@ export class SignUp extends React.Component {
     }
 
     showSignUp() {
-        console.log(this.state)
         this.state.showSignUp = true
         this.stateUpdate()
     }
 
     hideSignUp() {
-        console.log(this.state)
         this.state.password = ''
         this.state.confirm = ''
         this.state.showSignUp = false
